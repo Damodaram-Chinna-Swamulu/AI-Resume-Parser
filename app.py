@@ -456,12 +456,12 @@ with st.sidebar:
     else:
         st.error("GROQ API Key Missing")
 
-    st.markdown("""
-    ### Deployment Note
-    Locally, use `.env`.
+    # st.markdown("""
+    # ### Deployment Note
+    # Locally, use `.env`.
 
-    On Streamlit Cloud, add `GROQ_API_KEY` in **Secrets**.
-    """)
+    # On Streamlit Cloud, add `GROQ_API_KEY` in **Secrets**.
+    # """)
 
     st.markdown("---")
     st.caption("Tip: If the URL does not load, use the manual job description box below.")
