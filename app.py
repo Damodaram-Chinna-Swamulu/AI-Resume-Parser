@@ -53,120 +53,199 @@ groq_api_key = get_groq_api_key()
 
 st.markdown("""
 <style>
-/* Force clean light app */
-.stApp {
-    background: #F8FAFC;
-    color: #0F172A;
+:root {
+    --bg: #07111f;
+    --panel: rgba(15, 23, 42, 0.88);
+    --card: #ffffff;
+    --line: #dbeafe;
+    --text: #0f172a;
+    --muted: #475569;
+    --primary: #2563eb;
+    --accent: #8b5cf6;
+    --success: #0f766e;
+    --soft: #eff6ff;
+}
+
+html, body, .stApp {
+    background:
+        radial-gradient(circle at top, #eff6ff 0%, #f8fbff 45%, #eef2ff 100%);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 header[data-testid="stHeader"] {
     background: transparent;
 }
 
-/* Main container */
 .block-container {
-    padding-top: 2.5rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-    max-width: 1250px;
+    padding-top: 1.8rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    max-width: 1320px;
 }
 
-/* Sidebar */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0F172A 0%, #111827 100%);
+    background:
+        linear-gradient(180deg, #111827 0%, #172554 100%);
+    border-right: 1px solid rgba(148, 163, 184, 0.12);
 }
 
 section[data-testid="stSidebar"] * {
     color: #F8FAFC !important;
 }
 
+.sidebar-card, .mini-card, .glass-card, .info-card, .input-card, .step-card {
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.sidebar-card:hover, .mini-card:hover, .glass-card:hover, .info-card:hover, .input-card:hover, .step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(37, 99, 235, 0.12);
+}
+
 .sidebar-card {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.14);
-    padding: 14px 16px;
-    border-radius: 16px;
-    margin-bottom: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
 }
 
 .api-success {
-    background: #064E3B;
-    color: #D1FAE5 !important;
-    padding: 14px 16px;
+    background: linear-gradient(135deg, #064E3B, #047857);
+    color: #ECFDF5 !important;
+    padding: 12px 14px;
     border-radius: 14px;
     font-weight: 700;
+    border: 1px solid rgba(167, 243, 208, 0.25);
 }
 
-/* Hero */
 .hero-card {
-    background: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 100%);
-    border: 1px solid #DBEAFE;
-    border-radius: 28px;
-    padding: 34px 38px;
-    margin-bottom: 26px;
-    box-shadow: 0px 12px 30px rgba(15, 23, 42, 0.08);
+    background:
+        linear-gradient(135deg, #0F172A 0%, #1E3A8A 45%, #7C3AED 100%);
+    border: 1px solid rgba(219, 234, 254, 0.18);
+    border-radius: 30px;
+    padding: 30px 32px;
+    margin-bottom: 18px;
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18);
 }
 
 .hero-title {
-    font-size: 46px;
-    line-height: 1.1;
+    font-size: 42px;
+    line-height: 1.06;
     font-weight: 900;
-    color: #0F172A;
-    margin-bottom: 12px;
+    color: #F8FAFC;
+    margin-bottom: 10px;
 }
 
 .hero-subtitle {
-    font-size: 19px;
-    line-height: 1.7;
-    color: #475569;
-    max-width: 900px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #E0F2FE;
+    max-width: 980px;
 }
 
 .feature-row {
     display: flex;
-    gap: 12px;
-    margin-top: 22px;
+    gap: 10px;
+    margin-top: 16px;
     flex-wrap: wrap;
 }
 
 .feature-pill {
-    background: #E0F2FE;
-    color: #075985;
-    border: 1px solid #7DD3FC;
-    padding: 8px 14px;
+    background: rgba(248, 250, 252, 0.12);
+    color: #F8FAFC;
+    border: 1px solid rgba(191, 219, 254, 0.35);
+    padding: 8px 11px;
     border-radius: 999px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 }
 
-/* Section cards */
-# .input-card {
-#     background: #FFFFFF;
-#     border: 1px solid #E2E8F0;
-#     border-radius: 24px;
-#     padding: 24px;
-#     box-shadow: 0px 10px 24px rgba(15, 23, 42, 0.06);
-#     min-height: 210px;
-# }
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
 
-.section-title {
+.metric-card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 18px;
+    padding: 12px 14px;
+    color: #EFF6FF;
+}
+
+.metric-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #BFDBFE;
+    margin-bottom: 4px;
+}
+
+.metric-value {
     font-size: 20px;
     font-weight: 800;
-    color: #0F172A;
+}
+
+.info-card, .glass-card, .step-card {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FBFF 100%);
+    border: 1px solid #E5E7EB;
+    border-radius: 24px;
+    padding: 16px;
     margin-bottom: 14px;
 }
 
-.help-text {
-    color: #64748B;
-    font-size: 14px;
-    line-height: 1.6;
+.section-title {
+    font-size: 19px;
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 6px;
 }
 
-/* Inputs */
+.help-text, .subtle-text {
+    color: #64748B;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.tip-box {
+    #  background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%);
+    border: 1px solid #C4B5FD;
+    border-radius: 18px;
+    padding: 12px 13px;
+    color: #312E81;
+    font-size: 14px;
+}
+
+.badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.badge-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    # background: #EEF2FF;
+    color: #3730A3;
+    border: 1px solid #C7D2FE;
+    border-radius: 999px;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 [data-testid="stFileUploader"] {
-    background: #F8FAFC !important;
-    border: 1.5px dashed #94A3B8 !important;
+    background: #FFFFFF !important;
+    border: 1.5px dashed #93C5FD !important;
     border-radius: 18px !important;
-    padding: 16px !important;
+    padding: 14px !important;
 }
 
 [data-testid="stFileUploader"] label {
@@ -175,17 +254,18 @@ section[data-testid="stSidebar"] * {
 }
 
 [data-testid="stFileUploaderDropzone"] {
-    background: #FFFFFF !important;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FBFF 100%) !important;
     border: 1px dashed #CBD5E1 !important;
     border-radius: 16px !important;
 }
 
 [data-testid="stFileUploaderDropzone"] button {
-    background: #2563EB !important;
+    background: linear-gradient(135deg, #2563EB, #7C3AED) !important;
     color: #FFFFFF !important;
     border: none !important;
     border-radius: 12px !important;
     font-weight: 800 !important;
+    box-shadow: 0 10px 18px rgba(37, 99, 235, 0.18);
 }
 
 [data-testid="stTextInput"] label,
@@ -200,6 +280,14 @@ section[data-testid="stSidebar"] * {
     color: #0F172A !important;
     border: 1px solid #CBD5E1 !important;
     border-radius: 14px !important;
+    padding: 10px 12px !important;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.stTextInput input:focus,
+.stTextArea textarea:focus {
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
 }
 
 .stTextInput input::placeholder,
@@ -207,72 +295,84 @@ section[data-testid="stSidebar"] * {
     color: #94A3B8 !important;
 }
 
-/* Expander */
 [data-testid="stExpander"] {
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
-    border-radius: 16px;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
-/* Warning box */
 .warning-box {
-    background: #FFFBEB;
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
     color: #92400E;
     border: 1px solid #FCD34D;
-    border-radius: 16px;
-    padding: 16px 18px;
-    font-weight: 600;
-    margin-top: 18px;
+    border-radius: 18px;
+    padding: 14px 16px;
+    font-weight: 700;
+    margin-top: 12px;
 }
 
-/* Success box */
 .success-box {
-    background: #ECFDF5;
+    background: linear-gradient(135deg, #ECFDF5, #F0FDF4);
     color: #065F46;
     border: 1px solid #86EFAC;
-    border-radius: 16px;
-    padding: 18px 20px;
-    font-size: 17px;
+    border-radius: 18px;
+    padding: 16px 18px;
+    font-size: 16px;
     font-weight: 800;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
-/* Buttons */
 .stButton > button {
-    background: linear-gradient(90deg, #2563EB, #7C3AED) !important;
+    background: linear-gradient(135deg, #2563EB, #7C3AED) !important;
     color: #FFFFFF !important;
     border: none !important;
     border-radius: 16px !important;
-    padding: 14px 22px !important;
-    font-size: 17px !important;
+    padding: 12px 18px !important;
+    font-size: 16px !important;
     font-weight: 900 !important;
-    box-shadow: 0px 10px 22px rgba(37, 99, 235, 0.25);
+    box-shadow: 0 12px 22px rgba(37, 99, 235, 0.18);
+    transition: transform 140ms ease, box-shadow 140ms ease;
 }
 
 .stButton > button:hover {
-    background: linear-gradient(90deg, #1D4ED8, #6D28D9) !important;
-    color: #FFFFFF !important;
     transform: translateY(-1px);
+    box-shadow: 0 14px 24px rgba(124, 58, 237, 0.22);
 }
 
-/* Tabs */
 button[data-baseweb="tab"] {
     font-weight: 800 !important;
     color: #334155 !important;
+    border-radius: 12px 12px 0 0 !important;
 }
 
-/* Output text */
+button[data-baseweb="tab"]:hover {
+    color: #111827 !important;
+    background: #F8FAFC !important;
+}
+
 .stMarkdown, .stText, p, li {
     color: #0F172A;
 }
 
-/* Download buttons */
 .stDownloadButton > button {
-    background: #0F172A !important;
-    color: white !important;
+    background: linear-gradient(135deg, #2563EB, #7C3AED) !important;
+    color: #FFFFFF !important;
     border-radius: 14px !important;
     border: none !important;
     font-weight: 800 !important;
+    box-shadow: 0 10px 20px rgba(124, 58, 237, 0.22) !important;
+}
+
+.stDownloadButton > button:hover {
+    background: linear-gradient(135deg, #1D4ED8, #6D28D9) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 14px 24px rgba(37, 99, 235, 0.25) !important;
+
+@media (max-width: 900px) {
+    .metric-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 30px; }
+    .block-container { padding-left: 0.75rem; padding-right: 0.75rem; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -286,14 +386,20 @@ st.markdown("""
 <div class="hero-card">
     <div class="hero-title">💼 AI Job Application Agent</div>
     <div class="hero-subtitle">
-        Upload your resume, paste a job description URL, and let multiple AI agents create a complete job application package.
+        Upload your resume, paste a job URL, and let a guided AI workflow generate a polished job application package in minutes.
+        The experience is simple, visual, and friendly for beginners and professionals alike.
     </div>
     <div class="feature-row">
-        <div class="feature-pill">🤖 LangGraph Multi-Agent Workflow</div>
-        <div class="feature-pill">📄 Resume Analysis</div>
-        <div class="feature-pill">🔗 JD URL Extraction</div>
-        <div class="feature-pill">✍️ Cover Letter</div>
-        <div class="feature-pill">📊 Match Score</div>
+        <div class="feature-pill">🤖 Multi-Agent Workflow</div>
+        <div class="feature-pill">📄 Resume + JD Analysis</div>
+        <div class="feature-pill">✍️ Tailored Cover Letter</div>
+        <div class="feature-pill">📊 Match Score + Skill Gaps</div>
+        <div class="feature-pill">⬇️ One-click Downloads</div>
+    </div>
+    <div class="metric-grid">
+        <div class="metric-card"><div class="metric-title">Fast Setup</div><div class="metric-value">3 simple steps</div></div>
+        <div class="metric-card"><div class="metric-title">AI Assist</div><div class="metric-value">6 smart agents</div></div>
+        <div class="metric-card"><div class="metric-title">Outcome</div><div class="metric-value">Ready to apply</div></div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -304,7 +410,25 @@ st.markdown("""
 # ==============================
 
 with st.sidebar:
-    st.markdown("## 🤖 Multi-Agent Workflow")
+    st.markdown("## ✨ How this works")
+    st.markdown("""
+    <div class="tip-box">
+      1. Upload your resume<br>
+      2. Add a job URL or paste the JD<br>
+      3. Generate your tailored package
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("### 🌟 Why users love it")
+    st.info("Clear steps, readable outputs, and helpful suggestions for beginners and professionals alike.")
+
+    st.markdown("""
+    <div class="badge-row">
+      <span class="badge-chip">🧠 AI-guided</span>
+      <span class="badge-chip">📱 Mobile friendly</span>
+      <span class="badge-chip">⚡ Fast workflow</span>
+    </div>
+    """, unsafe_allow_html=True)
 
     steps = [
         "JD Extractor Agent",
@@ -338,6 +462,9 @@ with st.sidebar:
 
     On Streamlit Cloud, add `GROQ_API_KEY` in **Secrets**.
     """)
+
+    st.markdown("---")
+    st.caption("Tip: If the URL does not load, use the manual job description box below.")
 
 
 if not groq_api_key:
@@ -682,12 +809,28 @@ app = build_graph()
 
 st.markdown("## Start Your Application Package")
 
+st.markdown("""
+<div class="info-card">
+  <div class="section-title">🎯 Simple workflow, polished results</div>
+  <div class="help-text">Choose your resume, add the job description, and generate a polished application package in one click. Each section is clearly organized so you can review, refine, and download with confidence.</div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="badge-row">
+  <span class="badge-chip">✅ Resume analysis</span>
+  <span class="badge-chip">📊 Match scoring</span>
+  <span class="badge-chip">📝 Cover letter drafting</span>
+  <span class="badge-chip">📚 Skill-gap guidance</span>
+</div>
+""", unsafe_allow_html=True)
+
 col1, col2 = st.columns(2, gap="large")
 with col1:
     st.markdown('<div class="input-card">', unsafe_allow_html=True)
     st.markdown('<div class="section-title">📄 Resume Upload</div>', unsafe_allow_html=True)
     uploaded_resume = st.file_uploader("Upload Resume PDF", type=["pdf"])
-    st.markdown('<div class="help-text">Upload a clean PDF resume. Text-based PDF works best.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="help-text">Upload a clean PDF resume. Text-based PDF works best and improves extraction quality.</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
@@ -697,10 +840,10 @@ with col2:
         "Paste Job URL",
         placeholder="https://example.com/job-posting",
     )
-    st.markdown('<div class="help-text">Use a public job page URL. If the website blocks scraping, use manual JD below.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="help-text">Use a public job page URL. If the site blocks scraping, use the manual job description box below.</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-with st.expander("Optional: Paste Job Description manually if URL is blocked"):
+with st.expander("📝 Optional: Paste Job Description manually if URL is blocked"):
     jd_manual_text = st.text_area(
         "Paste JD text here",
         height=190,
@@ -709,7 +852,7 @@ with st.expander("Optional: Paste Job Description manually if URL is blocked"):
 
 st.markdown("""
 <div class="warning-box">
-⚠️ Some job websites block scraping or load content using JavaScript. If URL extraction fails, paste the job description manually in the optional box.
+⚠️ Some job websites block scraping or load content using JavaScript. If the URL does not work, paste the job description manually in the optional box.
 </div>
 """, unsafe_allow_html=True)
 
@@ -803,9 +946,14 @@ if "final_state" in st.session_state:
 
     st.markdown("""
 <div class="success-box">
-✅ Your AI Job Application Package is ready.
+✅ Your AI Job Application Package is ready. Review the outputs below and download what you need.
 </div>
 """, unsafe_allow_html=True)
+
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Match Score", "Ready", "AI generated")
+    c2.metric("Cover Letter", "Personalized", "HR friendly")
+    c3.metric("Skill Gap", "Actionable", "Learning tips")
 
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
         "📌 Job Details",
