@@ -139,14 +139,14 @@ section[data-testid="stSidebar"] * {
 }
 
 /* Section cards */
-.input-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0px 10px 24px rgba(15, 23, 42, 0.06);
-    min-height: 210px;
-}
+# .input-card {
+#     background: #FFFFFF;
+#     border: 1px solid #E2E8F0;
+#     border-radius: 24px;
+#     padding: 24px;
+#     box-shadow: 0px 10px 24px rgba(15, 23, 42, 0.06);
+#     min-height: 210px;
+# }
 
 .section-title {
     font-size: 20px;
@@ -683,7 +683,6 @@ app = build_graph()
 st.markdown("## Start Your Application Package")
 
 col1, col2 = st.columns(2, gap="large")
-
 with col1:
     st.markdown('<div class="input-card">', unsafe_allow_html=True)
     st.markdown('<div class="section-title">📄 Resume Upload</div>', unsafe_allow_html=True)
